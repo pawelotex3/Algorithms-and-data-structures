@@ -1,0 +1,45 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int n, m, i, j, licznik;
+    cin>>n>>m;
+    licznik=1;
+    while(n!=0 || m!=0){
+
+        int tower1[n+1];
+        int tower2[m+1];
+        int wyniki[n+1][m+1];
+
+        for(i=1; i<=n; i++){
+            cin>>tower1[i];
+        }
+
+        for(i=1; i<=m; i++){
+            cin>>tower2[i];
+        }
+
+        for(i=0; i<=n; i++){
+            for(j=0; j<=m; j++){
+                wyniki[i][j]=0;
+            }
+        }
+
+        for(i=1; i<=n; i++){
+            for(j=1; j<=m; j++){
+                if(tower1[i]==tower2[j]) wyniki[i][j]=max(wyniki[i-1][j-1]+1, max(wyniki[i][j-1], wyniki[i-1][j]));
+                else wyniki[i][j]=max(wyniki[i][j-1], wyniki[i-1][j]);
+            }
+        }
+
+
+        cout<<"Twin Towers #"<<licznik<<endl;
+        cout<<"Number of Tiles : "<<wyniki[n][m]<<endl;
+        licznik++;
+        cin>>n>>m;
+    }
+
+    return 0;
+}
