@@ -1,0 +1,59 @@
+#include<iostream>
+#include<vector>
+#include<stack>
+#include<queue>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    int n, i, operacja, liczba;
+    bool s, k, kp;
+    while(cin>>n){
+        stack <int> stos;
+        queue <int> kolejka;
+        vector <int> elementy;
+        s=k=kp=true;
+        for(i=0; i<n; i++){
+            cin>>operacja>>liczba;
+            if(operacja==1){
+                stos.push(liczba);
+                kolejka.push(liczba);
+                elementy.push_back(liczba);
+                sort(elementy.begin(), elementy.end());
+            }
+            else{
+                if(elementy.size()>0){
+                    if(liczba!=kolejka.front()) k=false;
+                    if(liczba!=stos.top()) s=false;
+                    if(liczba!=elementy[elementy.size()-1]) kp=false;
+                    kolejka.pop();
+                    stos.pop();
+                    elementy.pop_back();
+                }
+                else{
+                    k=s=kp=false;
+                }
+            }
+        }
+        if(s){
+            if(k || kp) cout<<"not sure"<<endl;
+            else cout<<"stack"<<endl;
+        }
+        else{
+            if(k){
+                if(kp) cout<<"not sure"<<endl;
+                else cout<<"queue"<<endl;
+            }
+            else{
+                if(kp) cout<<"priority queue"<<endl;
+                else cout<<"impossible"<<endl;
+            }
+
+        }
+
+
+
+    }
+    return 0;
+}
