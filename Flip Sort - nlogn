@@ -1,0 +1,26 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int n, *i, *j, licznik;
+
+    while(cin>>n){
+        int *tablica = new int[n];
+        licznik=0;
+        for(i=tablica; i<tablica+n; i++){
+            cin>>*i;
+        }
+
+        for(i=tablica; i<tablica+n-1; i++){
+            for(j=i+1; j<tablica+n; j++){
+                if(*i>*j) licznik++;
+            }
+        }
+
+        cout<<"Minimum exchange operations : "<<licznik<<endl;
+        delete tablica;
+    }
+    return 0;
+}
